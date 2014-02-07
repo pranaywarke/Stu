@@ -329,29 +329,18 @@ function su(){
 	};
 	
 	this.prettyjson = function(json){
-		json = json.replace(/ /g,'');
-		var validate = JSON.parse(json);
-		var lookingFor = '';
-		var stack = [];
-		var skip = false;
-		for(var t in json){
-			if(json[t] == "{" || json[t]=="}"){
-				lookingFor = json[t]=='}'?'{':'}';
-				skip=true;
-			}
-			stack.push(json[t]);
-			if(!skip){
-				if(json[t]==lookingFor){
-					var nstack = []
-					for(var j in stack){
-						nstack.push()
-					}
-				}
-			}
-			
-			skip=false;
-		}
 		
+		for(var t in json){
+			if(json[t] instanceof Object)
+				this.prettyjson(json[t]);
+			var str = JSON.stringify(json[t]);
+			str = str.replace("{","OPENBR <br>");
+			str = str.replace("}","CLOSEBR <br>");
+			str = str.replace("[","OPEN <br>");
+			str = str.replace("]","CLOSE <br>");
+			json[t]=str;
+		}
+		return json;
 	}
 	
 	this.jsontophp = function(json){
@@ -446,9 +435,7 @@ function su(){
 		 return str;
 	};
 	
-	this.phptojson =function(php){
-		//TODO
-	}
+	
 	this.phptojson = function(php){
 		php = php.replace(/ /g,'');
 		php = php.replace(/array/g,'');

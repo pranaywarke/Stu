@@ -102,13 +102,19 @@ try{
 		scroll();
 	};
 	
-	json.onclick = function(){
-		output2.innerHTML = _su.prettyjson(input1.value);
+	/*json.onclick = function(){
+		var str = JSON.stringify(_su.prettyjson(JSON.parse(input1.value)));
+		str = str.replace("OPENBR <br>","{");
+			str = str.replace("CLOSEBR <br>","}");
+			str = str.replace("OPEN <br>","[");
+			str = str.replace("CLOSE <br>","]");
+			str = str.replace("\\","");
+		output2.innerHTML = str;
 		scroll();
 		
-	}
+	}*/
 	
-	/*json.onclick = function(){
+	json.onclick = function(){
 		 var el = {
 		           input: input1,
 		           result: $("#output2")
@@ -126,7 +132,7 @@ try{
           data:o
       });
       scroll();
-	};*/
+	};
 	
 	xml.onclick = function(){
 		try{
